@@ -10,7 +10,6 @@ public class NumeroAleatorio
         int intentos = 0;
         
         System.out.println("Que número estoy pensando?");
-//        System.out.println(numeroAleatorio);
         
         do
         {
