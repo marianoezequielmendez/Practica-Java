@@ -13,7 +13,7 @@ public class ProcesadorDeTexto01 {
 class MarcoPDT01 extends JFrame
 {
     public MarcoPDT01(){
-        setBounds(450,200,500,300);
+        setBounds(450,200,700,400);
         
         LaminaPDT01 miLamina = new LaminaPDT01();
         add(miLamina);
@@ -27,7 +27,24 @@ class LaminaPDT01 extends JPanel{
         setLayout(new BorderLayout());
         area = new JTextPane();
         add(area, BorderLayout.CENTER);
-        Menu();     
+        Menu();
+        Emergente(); 
+//        BarraDeHerramientas();
+        SimplificacionBarraDeHerramientas();
+    }
+    
+    private void Emergente(){
+        JPopupMenu emergente = new JPopupMenu();
+        JMenuItem opcionNegrita = new JMenuItem("Negrita");
+        JMenuItem opcionCursiva = new JMenuItem("Cursiva");
+        
+        emergente.add(opcionNegrita);
+        emergente.add(opcionCursiva);
+        
+        area.setComponentPopupMenu(emergente);
+        
+        opcionNegrita.addActionListener(new StyledEditorKit.BoldAction());
+        opcionCursiva.addActionListener(new StyledEditorKit.ItalicAction());
     }
     
     private void Menu(){
@@ -79,12 +96,45 @@ class LaminaPDT01 extends JPanel{
 //        tamanio.add(dieciseis);
 //        tamanio.add(dieciocho);
 //        tamanio.add(veinte);  
-        gestionMenu("10", "tamaño", "", 9, 10 );
-        gestionMenu("12", "tamaño", "", 9, 12 );
-        gestionMenu("14", "tamaño", "", 9, 14 );
-        gestionMenu("16", "tamaño", "", 9, 16 );
-        gestionMenu("18", "tamaño", "", 9, 18 );
-        gestionMenu("20", "tamaño", "", 9, 20 );
+//        gestionMenu("10", "tamaño", "", 9, 10 );
+//        gestionMenu("12", "tamaño", "", 9, 12 );
+//        gestionMenu("14", "tamaño", "", 9, 14 );
+//        gestionMenu("16", "tamaño", "", 9, 16 );
+//        gestionMenu("18", "tamaño", "", 9, 18 );
+//        gestionMenu("20", "tamaño", "", 9, 20 );
+        
+        ButtonGroup tamanioGrupo = new ButtonGroup();
+        JRadioButtonMenuItem diez = new JRadioButtonMenuItem("10");
+        tamanio.add(diez);
+        diez.addActionListener(new StyledEditorKit.FontSizeAction("Cambiar_Tamaño", 10));
+        JRadioButtonMenuItem doce = new JRadioButtonMenuItem("12");
+        tamanio.add(doce);
+        doce.addActionListener(new StyledEditorKit.FontSizeAction("Cambiar_Tamaño", 12));
+        JRadioButtonMenuItem catorce = new JRadioButtonMenuItem("14");
+        tamanio.add(catorce);
+        catorce.addActionListener(new StyledEditorKit.FontSizeAction("Cambiar_Tamaño", 14));
+        JRadioButtonMenuItem dieciseis = new JRadioButtonMenuItem("16");
+        tamanio.add(dieciseis);
+        dieciseis.addActionListener(new StyledEditorKit.FontSizeAction("Cambiar_Tamaño", 16));
+        JRadioButtonMenuItem dieciocho = new JRadioButtonMenuItem("18");
+        tamanio.add(dieciocho);
+        dieciocho.addActionListener(new StyledEditorKit.FontSizeAction("Cambiar_Tamaño", 18));
+        tamanioGrupo.add(diez);
+        tamanioGrupo.add(doce);
+        tamanioGrupo.add(catorce);
+        tamanioGrupo.add(dieciseis);
+        tamanioGrupo.add(dieciocho);
+        
+        //Atajos de teclado (Clase 110)
+        //Tamaño letra
+        diez.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_0, InputEvent.CTRL_DOWN_MASK));
+        doce.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK));
+        catorce.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK));
+        dieciseis.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_DOWN_MASK));
+        dieciocho.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_8, InputEvent.CTRL_DOWN_MASK));
+        
+        //Estilos
+        
         
         add(barraMenu, BorderLayout.NORTH);
     }
@@ -106,10 +156,12 @@ class LaminaPDT01 extends JPanel{
            
            else if(menu == "estilo"){
                estilo.add(elementoMenu);
-               if(estilos == Font.BOLD){                   
+               if(estilos == Font.BOLD){ 
+                    elementoMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
                     elementoMenu.addActionListener(new StyledEditorKit.BoldAction());
                }
                else if (estilos == Font.ITALIC){
+                    elementoMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_DOWN_MASK));
                     elementoMenu.addActionListener(new StyledEditorKit.ItalicAction());
                }
            }
@@ -120,6 +172,51 @@ class LaminaPDT01 extends JPanel{
            }
 //           elementoMenu.addActionListener(new GestionMenu(rotulo, tipoLetra, estilos, tamanioLetra));
         }
+    
+    public void BarraDeHerramientas(){
+//        JToolBar barra = new JToolBar();
+        /*
+        JButton negritaBarra = new JButton(new ImageIcon("src/graficos/Imagenes/negrita.png"));
+        JButton cursivaBarra = new JButton(new ImageIcon("src/graficos/Imagenes/cursiva.png"));
+        JButton botonAzulBarra = new JButton(new ImageIcon("src/graficos/Imagenes/bolaAzul.png"));
+        JButton botonAmarilloBarra = new JButton(new ImageIcon("src/graficos/Imagenes/bolaAmarilla.png"));
+        JButton botonRojoBarra = new JButton(new ImageIcon("src/graficos/Imagenes/bolaRoja.png"));
+        
+        negritaBarra.addActionListener(new StyledEditorKit.BoldAction());
+        cursivaBarra.addActionListener(new StyledEditorKit.ItalicAction());
+        botonAzulBarra.addActionListener(new StyledEditorKit.ForegroundAction("Azul", Color.BLUE));
+        botonAmarilloBarra.addActionListener(new StyledEditorKit.ForegroundAction("Amarillo", Color.YELLOW));
+        botonRojoBarra.addActionListener(new StyledEditorKit.ForegroundAction("Rojo", Color.RED));
+        
+        barra.add(negritaBarra);
+        barra.add(cursivaBarra);
+        barra.add(botonAzulBarra);
+        barra.add(botonAmarilloBarra);
+        barra.add(botonRojoBarra);
+        */
+        
+//        barra.setOrientation(1);
+//        add(barra, BorderLayout.SOUTH);
+    }
+    
+    public void SimplificacionBarraDeHerramientas(){
+        barra = new JToolBar();
+        
+        ConfiguraBarraSimplificada("src/graficos/Imagenes/negrita.png").addActionListener(new StyledEditorKit.BoldAction());
+        ConfiguraBarraSimplificada("src/graficos/Imagenes/cursiva.png").addActionListener(new StyledEditorKit.ItalicAction());
+        barra.addSeparator();
+        ConfiguraBarraSimplificada("src/graficos/Imagenes/bolaAzul.png").addActionListener(new StyledEditorKit.ForegroundAction("Azul",Color.BLUE));
+        ConfiguraBarraSimplificada("src/graficos/Imagenes/bolaAmarilla.png").addActionListener(new StyledEditorKit.ForegroundAction("Amarillo",Color.YELLOW));
+        ConfiguraBarraSimplificada("src/graficos/Imagenes/bolaRoja.png").addActionListener(new StyledEditorKit.ForegroundAction("Rojo",Color.RED));
+        
+        add(barra, BorderLayout.SOUTH);
+    }
+    
+    public JButton ConfiguraBarraSimplificada(String ruta){
+        JButton boton = new JButton(new ImageIcon(ruta));
+        barra.add(boton);
+        return boton;
+    }
     
 //    private class GestionMenu implements ActionListener{
 //        GestionMenu(String elemento, String fuenteString, int estiloInt, int tamanioInt){
@@ -159,6 +256,8 @@ class LaminaPDT01 extends JPanel{
     JTextPane area;
     JMenu fuente, estilo, tamanio;
     Font letras;
-//    boolean verificacionNegrita;
-//    boolean verificacionCursiva;
+    
+    //Clase 114, Simplificar Barra
+    JButton negritaBarra, cursivaBarra, botonAzulBarra, botonAmarilloBarra, botonRojoBarra;
+    JToolBar barra;
 }

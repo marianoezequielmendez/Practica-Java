@@ -32,12 +32,20 @@ class LaminaCDM01 extends JPanel{
         JMenu ayuda = new JMenu("Help");
         JMenu sobreEnAyuda = new JMenu("About");
         
-        JMenuItem guardarEnArchivo = new JMenuItem("Save");
-        JMenuItem guardarComoEnArchivo = new JMenuItem("Save As");
+//        JMenuItem guardarEnArchivo = new JMenuItem("Save");
+//        JMenuItem guardarComoEnArchivo = new JMenuItem("Save As");
+        JCheckBoxMenuItem guardarEnArchivo = new JCheckBoxMenuItem("Save");
+        JCheckBoxMenuItem guardarComoEnArchivo = new JCheckBoxMenuItem("Save As");
+        
         JMenuItem cortarEnEdicion = new JMenuItem("Cut");
         JMenuItem copiarEnEdicion = new JMenuItem("Copy");
         JMenuItem pegarEnEdicion = new JMenuItem("Paste");
-        JMenuItem pluginsEnHerramientas = new JMenuItem("Plugins");
+        
+//        JMenuItem pluginsEnHerramientas = new JMenuItem("Plugins");
+        JRadioButton pluginsEnHerramientas = new JRadioButton("Plugins");
+        JRadioButton opcionesEnHerramientas = new JRadioButton("Options");
+        ButtonGroup grupoHerramientas = new ButtonGroup(); 
+        
         JMenuItem masEnSobre = new JMenuItem("More...");
         
         //Barra
@@ -49,7 +57,6 @@ class LaminaCDM01 extends JPanel{
         //Archivo
         archivo.add(guardarEnArchivo);
         archivo.addSeparator(); //Marca una linea de separacion en el menu. Se usa para agrupar
-        archivo.add(guardarComoEnArchivo);
         
         //Edicion
         edicion.add(cortarEnEdicion);
@@ -58,6 +65,9 @@ class LaminaCDM01 extends JPanel{
         
         //Herramientas
         herramientas.add(pluginsEnHerramientas);
+        herramientas.add(opcionesEnHerramientas);
+        grupoHerramientas.add(pluginsEnHerramientas);
+        grupoHerramientas.add(opcionesEnHerramientas);
         
         //Ayuda
         ayuda.add(sobreEnAyuda);
